@@ -1,0 +1,21 @@
+.footer {
+  max-width: 1358px;
+  max-height: 20px;
+  padding-top: 778px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__dev-name {
+  min-height: 20px;
+  min-width: 204px;
+  padding-left: 40px;
+  padding-bottom: 24px;
+}
+
+.footer__year {
+  min-height: 20px;
+  min-width: 38px;
+  padding-right: 42px;
+  padding-bottom: 24px;
+}
