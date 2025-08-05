@@ -15,12 +15,14 @@
 .header__date-location {
   padding-top: 11px;
   padding-right: 500px;
+  font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
 }
 
 .header__add-clothes {
   max-width: 116px;
   max-height: 24px;
   margin: 0 20px 0 auto;
+  font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
 }
 .header__user-name {
   margin: 0;
@@ -28,6 +30,7 @@
   max-height: 25px;
   padding-left: 20px;
   padding-right: 20px;
+  font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
 }
 
 .header__user-avatar {

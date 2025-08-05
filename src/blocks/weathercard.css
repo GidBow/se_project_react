@@ -14,6 +14,7 @@
   top: 20px;
   left: 16px;
   color: rgba(255, 255, 255, 1);
+  font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
 }
 
 .weather-card__image {
