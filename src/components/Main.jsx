@@ -1,9 +1,6 @@
-import WeatherCard from "./weathercard";
-import { defaultClothingItems } from "../utils/constants";
+import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 import "../vendor/fonts.css";
-
-// const filteredItems = defaultClothingItems.filter;
 
 function Main({ weatherData, handleCardClick }) {
   return (
