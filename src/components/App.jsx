@@ -6,7 +6,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import ModalWithForm from "./ModalWithForm";
 import ItemModal from "./ItemModal";
-import { getweather, filterWeatherData } from "./weatherAPI";
+import { getweather, filterWeatherData } from "../utils/weatherAPI";
 import { coordinates, APIkey } from "../utils/constants";
 
 function App() {
