@@ -2,7 +2,7 @@ import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 import "../vendor/fonts.css";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ weatherData, handleCardClick, defaultClothingItems }) {
   return (
     <main>
       <WeatherCard weatherData={weatherData} />

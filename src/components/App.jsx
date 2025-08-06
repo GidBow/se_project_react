@@ -33,18 +33,31 @@ function App() {
   };
 
   useEffect(() => {
-    getweather(coordinates, APIkey)
+    getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
       .catch(console.error);
+
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener("keydown", closeByEscape);
+
+    return () => document.removeEventListener("keydown", closeByEscape);
   }, []);
 
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+        <Header
+          handleAddClick={handleAddClick}
+          weatherData={weatherData}
+          // isOpen={activeModal === "add-garment"}
+        />
         <Main
           weatherData={weatherData}
           handleCardClick={handleCardClick}
@@ -56,6 +69,7 @@ function App() {
         buttonText="Add garment"
         title="New Garment"
         activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         handleCloseClick={closeModal}
       >
         <label htmlFor="name" className="modal__label">
@@ -120,6 +134,7 @@ function App() {
         </fieldset>
       </ModalWithForm>
       <ItemModal
+        isOpen={activeModal === "preview"}
         activeModal={activeModal}
         card={selectedCard}
         handleCloseClick={closeModal}

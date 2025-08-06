@@ -1,6 +1,6 @@
-function ItemModal({ activeModal, card, handleCloseClick }) {
+function ItemModal({ activeModal, card, handleCloseClick, isOpen }) {
   return (
-    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content-type-image">
         <button
           type="button"
