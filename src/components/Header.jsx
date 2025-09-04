@@ -21,7 +21,7 @@ function Header({ handleAddClick, weatherData }) {
         className="header__add-clothes"
         onClick={handleAddClick}
       >
-        Add garment
+        +Add garment
       </button>
       <p className="header__user-name">Terrence Tegegne</p>
       <img src={avatar} alt="User Avatar" className="header__user-avatar" />

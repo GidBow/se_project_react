@@ -23,6 +23,7 @@
   max-height: 24px;
   margin: 0 20px 0 auto;
   font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
+  border: none;
 }
 .header__user-name {
   margin: 0;
