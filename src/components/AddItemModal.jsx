@@ -58,6 +58,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             name="weather"
             className="modal__radio-input"
             onChange={handleChange}
+            checked={values.weather === "hot"}
           />
           Hot
         </label>
@@ -70,6 +71,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             name="weather"
             className="modal__radio-input"
             onChange={handleChange}
+            checked={values.weather === "warm"}
           />
           Warm
         </label>
@@ -82,6 +84,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             name="weather"
             className="modal__radio-input"
             onChange={handleChange}
+            checked={values.weather === "cold"}
           />
           Cold
         </label>

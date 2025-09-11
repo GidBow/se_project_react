@@ -3,7 +3,6 @@
   max-height: 20px;
   display: flex;
   justify-content: space-between;
-  align-self: baseline;
 }
 
 .footer__dev-name {
