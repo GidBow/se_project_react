@@ -1,0 +1,34 @@
+.clothes-section {
+  display: inline-grid;
+  justify-items: space-between;
+  margin: 0;
+}
+
+.clothes-section__header {
+  display: flex;
+  padding: 3px;
+}
+
+.clothes-section__items {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+  border-radius: 5px;
+  border: 1px;
+  justify-items: space-between;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.clothes-section__title {
+  width: 94px;
+  height: 25px;
+}
+
+.clothes-section__add-new {
+  width: 88px;
+  height: 25px;
+  margin: 15px 0;
+  border: none;
+}

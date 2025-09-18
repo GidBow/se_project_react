@@ -10,6 +10,7 @@ import { coordinates, APIkey } from "../utils/constants";
 import { defaultClothingItems } from "../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal";
+import Profile from "./Profile";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -91,7 +92,10 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<p>PROFILE</p>} />
+            <Route
+              path="/profile"
+              element={<Profile onCardClick={handleCardClick} />}
+            />
           </Routes>
 
           <Footer />

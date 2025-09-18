@@ -1,0 +1,11 @@
+.profile {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+  margin: 0 0;
+  padding: 0 0;
+}
+
+.profile__sidebar {
+  margin: 0;
+}

@@ -38,3 +38,9 @@
   height: 40px;
   width: 40px;
 }
+
+.header__profile-link {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+}
