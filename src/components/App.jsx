@@ -37,6 +37,8 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const onDeleteItem = () => {};
+
   const onAddItem = (inputValues) => {
     //for API call fetch func
     //.then(data=>{})...  all this stuff below
@@ -94,7 +96,12 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  onCardClick={handleCardClick}
+                  handleAddClick={handleAddClick}
+                />
+              }
             />
           </Routes>
 
