@@ -23,14 +23,15 @@
   position: absolute;
   top: 5%;
   left: 50%;
+  text-align: center;
   transform: translate(-50%, -50%);
   max-height: 24px;
-  max-width: 72px;
+  max-width: 100px;
   background-color: rgba(255, 255, 255, 1);
   font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
   font-size: 16px;
   line-height: 20px;
-  padding: 2px, 12px;
+  padding: 2px 12px;
 }
 
 .cards__img {

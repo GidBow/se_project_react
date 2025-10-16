@@ -1,12 +1,7 @@
-import { useState } from "react";
-import { defaultClothingItems } from "../utils/constants";
 import ItemCard from "./ItemCard";
 import "../blocks/ClothesSection.css";
-import AddItemModal from "./AddItemModal";
 
-function ClothesSection({ onCardClick, handleAddClick }) {
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
-
+function ClothesSection({ onCardClick, handleAddClick, clothingItems }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
@@ -20,15 +15,11 @@ function ClothesSection({ onCardClick, handleAddClick }) {
         </button>
       </div>
       <ul className="clothes-section__items">
-        {clothingItems
-          //   .filter((item) => {
-          //     return item.weather === weatherData.type;
-          //   })
-          .map((item) => {
-            return (
-              <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-            );
-          })}
+        {clothingItems.map((item) => {
+          return (
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+          );
+        })}
       </ul>
     </div>
   );
