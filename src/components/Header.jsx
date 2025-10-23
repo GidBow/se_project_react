@@ -1,7 +1,6 @@
 import hlogo from "../assets/wtwr-header.svg";
 import avatar from "../assets/avatar.svg";
 import ToggleSwitch from "./ToggleSwitch";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Header({ handleAddClick, weatherData }) {
@@ -9,7 +8,6 @@ function Header({ handleAddClick, weatherData }) {
     month: "long",
     day: "numeric",
   });
-  const [value, setValue] = useState(false);
   return (
     <header className="header">
       <Link to="/">

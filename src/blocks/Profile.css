@@ -8,4 +8,7 @@
 
 .profile__sidebar {
   margin: 0;
+  font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
+  color: rgba(0, 0, 0, 1);
+  font-size: 20px;
 }
