@@ -38,11 +38,16 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const handleDeleteClick = (card) => {
+    setActiveModal("delete");
+    setSelectedCard(card);
+  };
+
   const onDeleteItemHandler = (itemID) => {
-    deleteItem({ itemID })
-      .then((id) => {
+    deleteItem(itemID)
+      .then(() => {
         const filteredArray = clothingItems.filter((item) => {
-          return item.id != itemID;
+          return item.id !== itemID;
         });
         setClothingItems(filteredArray);
         closeModal();
@@ -135,8 +140,9 @@ function App() {
           isOpen={activeModal === "preview"}
           activeModal={activeModal}
           card={selectedCard}
-          handleCloseClick={closeModal}
+          onClose={closeModal}
           onDeleteItemHandler={onDeleteItemHandler}
+          handleDeleteClick={handleDeleteClick}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

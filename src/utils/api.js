@@ -16,7 +16,8 @@ export const addItems = ({ name, imageUrl, weather }) => {
   }).then(handleServerResponse);
 };
 
-export const deleteItem = ({ itemID }) => {
+export const deleteItem = (itemID) => {
+  console.log("deleteItem function called with ID:", itemID);
   return fetch(`${baseUrl}/items/${itemID}`, {
     headers,
     method: "DELETE",

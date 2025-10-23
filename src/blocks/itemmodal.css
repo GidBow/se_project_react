@@ -7,7 +7,7 @@
   position: relative;
   padding: 28px 28px 36px;
   box-sizing: border-box;
-  max-height: 610px;
+  max-height: 640px;
   height: 100%;
   max-width: 498px;
   width: 100%;
@@ -30,6 +30,7 @@
 .modal__weather {
   font-size: 20px;
   line-height: 24px;
+  padding-bottom: 32px;
 }
 
 .modal__delete-btn {
