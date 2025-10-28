@@ -6,6 +6,8 @@ The main page shows the date and temperature of your current area and displays c
 
 This project was built using HTML, CSS, JavaScript, and React. A preloaded database with options to delete or add for customization.
 
+Video presentation skipped per agreement with Learning Coach Naili on 10/28/2025.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
