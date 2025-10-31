@@ -7,7 +7,6 @@ function Profile({ onCardClick, handleAddClick, clothingItems }) {
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar />
-        <img src="../assets" alt="" />
       </section>
       <section className="profile__clothing-items">
         <ClothesSection

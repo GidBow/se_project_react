@@ -6,7 +6,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import ItemModal from "./ItemModal";
 import { getWeather, filterWeatherData } from "../utils/weatherAPI";
-import { coordinates, APIkey } from "../utils/constants";
+import { coordinates, apiKey } from "../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal";
 import Profile from "./Profile";
@@ -63,7 +63,7 @@ function App() {
     addItems(newCardData)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
-        closeModal();
+        setActiveModal("");
       })
       .catch(console.error);
   };
@@ -73,7 +73,7 @@ function App() {
   };
 
   useEffect(() => {
-    getWeather(coordinates, APIkey)
+    getWeather(coordinates, apiKey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
@@ -82,8 +82,7 @@ function App() {
 
     getItems()
       .then((data) => {
-        setClothingItems(data);
-        clothingItems.reverse();
+        setClothingItems([...data].reverse());
       })
       .catch(console.error);
 

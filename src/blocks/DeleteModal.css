@@ -76,6 +76,7 @@
   border-radius: 8px;
   position: relative;
   margin: 0;
+  background-color: #fff;
 }
 
 .modal__delete-no {
@@ -87,4 +88,5 @@
   right: 60px;
   padding-bottom: 40px;
   position: relative;
+  background-color: #fff;
 }

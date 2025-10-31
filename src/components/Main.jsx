@@ -35,4 +35,3 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
 }
 
 export default Main;
-``;
