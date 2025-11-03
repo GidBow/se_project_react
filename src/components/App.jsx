@@ -42,11 +42,11 @@ function App() {
     setSelectedCard(card);
   };
 
-  const onDeleteItemHandler = (itemID) => {
-    deleteItem(itemID)
+  const onDeleteItemHandler = (item_id) => {
+    deleteItem(item_id)
       .then(() => {
         const filteredArray = clothingItems.filter((item) => {
-          return item.id !== itemID;
+          return item._id !== item_id;
         });
         setClothingItems(filteredArray);
         closeModal();
@@ -63,7 +63,7 @@ function App() {
     addItems(newCardData)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
-        setActiveModal("");
+        closeModal();
       })
       .catch(console.error);
   };

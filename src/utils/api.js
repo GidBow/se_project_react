@@ -5,20 +5,23 @@ export const handleServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 
-export const getItems = () =>
-  fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
+function request(url, options) {
+  return fetch(url, options).then(handleServerResponse);
+}
+
+export const getItems = () => request(`${baseUrl}/items`, { headers });
 
 export const addItems = ({ name, imageUrl, weather }) => {
-  return fetch(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "POST",
     headers,
     body: JSON.stringify({ name, imageUrl, weather }),
-  }).then(handleServerResponse);
+  });
 };
 
-export const deleteItem = (itemID) => {
-  return fetch(`${baseUrl}/items/${itemID}`, {
+export const deleteItem = (item_id) => {
+  return request(`${baseUrl}/items/${item_id}`, {
     headers,
     method: "DELETE",
-  }).then(handleServerResponse);
+  });
 };
