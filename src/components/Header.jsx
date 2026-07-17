@@ -3,7 +3,7 @@ import avatar from "../assets/avatar.svg";
 import ToggleSwitch from "./ToggleSwitch";
 import { Link } from "react-router-dom";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({ handleAddClick, weatherData, isUsingFallbackLocation }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -15,6 +15,9 @@ function Header({ handleAddClick, weatherData }) {
       </Link>
       <div className="header__date-location">
         {currentDate}, {weatherData.city}
+        {isUsingFallbackLocation && (
+          <span className="header__fallback"> (using fallback location)</span>
+        )}
       </div>
       <ToggleSwitch />
       <button

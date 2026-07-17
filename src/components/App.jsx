@@ -6,7 +6,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import ItemModal from "./ItemModal";
 import { getWeather, filterWeatherData } from "../utils/weatherAPI";
-import { coordinates, apiKey } from "../utils/constants";
+import { defaultCoordinates, apiKey } from "../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal";
 import Profile from "./Profile";
@@ -24,6 +24,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [isUsingFallbackLocation, setIsUsingFallbackLocation] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -73,12 +74,44 @@ function App() {
   };
 
   useEffect(() => {
-    getWeather(coordinates, apiKey)
-      .then((data) => {
-        const filteredData = filterWeatherData(data);
-        setWeatherData(filteredData);
-      })
-      .catch(console.error);
+    // Use Geolocation API to get user's location. On success use that, otherwise fall back to defaultCoordinates.
+    const handleWeatherForCoords = (coords) => {
+      getWeather(coords, apiKey)
+        .then((data) => {
+          const filteredData = filterWeatherData(data);
+          setWeatherData(filteredData);
+        })
+        .catch(console.error);
+    };
+
+    if (navigator && navigator.geolocation) {
+      const geoOptions = {
+        enableHighAccuracy: false,
+        timeout: 10000,
+        maximumAge: 60 * 1000,
+      };
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const coords = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+          setIsUsingFallbackLocation(false);
+          handleWeatherForCoords(coords);
+        },
+        (err) => {
+          // If user denies or error occurs, fall back to default coordinates
+          console.warn("Geolocation error, using default coordinates:", err);
+          setIsUsingFallbackLocation(true);
+          handleWeatherForCoords(defaultCoordinates);
+        },
+        geoOptions
+      );
+    } else {
+      // Geolocation not supported, use default
+      setIsUsingFallbackLocation(true);
+      handleWeatherForCoords(defaultCoordinates);
+    }
 
     getItems()
       .then((data) => {
@@ -102,7 +135,11 @@ function App() {
     >
       <div className="page">
         <div className="page__content">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+          <Header
+            handleAddClick={handleAddClick}
+            weatherData={weatherData}
+            isUsingFallbackLocation={isUsingFallbackLocation}
+          />
           <Routes>
             <Route
               path="/"
