@@ -10,7 +10,9 @@ import { defaultCoordinates, apiKey } from "../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "./AddItemModal";
 import Profile from "./Profile";
+import ProtectedRoute from "./ProtectedRoute";
 import { getItems, addItems, deleteItem } from "../utils/api";
+import { signIn, checkToken } from "../utils/auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -41,6 +43,16 @@ function App() {
   const handleDeleteClick = (card) => {
     setActiveModal("delete");
     setSelectedCard(card);
+  };
+
+  const handleLogin = ({ email, password }) => {
+    signIn({ email, password })
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+        }
+      })
+      .catch(console.error);
   };
 
   const onDeleteItemHandler = (item_id) => {
@@ -74,6 +86,20 @@ function App() {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      checkToken(token)
+        .then(() => {
+          // Token is valid; keep the session active.
+        })
+        .catch(() => {
+          localStorage.removeItem("jwt");
+        });
+    }
+  }, []);
+
+  useEffect(() => {
     // Use Geolocation API to get user's location. On success use that, otherwise fall back to defaultCoordinates.
     const handleWeatherForCoords = (coords) => {
       getWeather(coords, apiKey)
@@ -105,7 +131,7 @@ function App() {
           setIsUsingFallbackLocation(true);
           handleWeatherForCoords(defaultCoordinates);
         },
-        geoOptions
+        geoOptions,
       );
     } else {
       // Geolocation not supported, use default
@@ -154,11 +180,13 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  onCardClick={handleCardClick}
-                  handleAddClick={handleAddClick}
-                  clothingItems={clothingItems}
-                />
+                <ProtectedRoute>
+                  <Profile
+                    onCardClick={handleCardClick}
+                    handleAddClick={handleAddClick}
+                    clothingItems={clothingItems}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
