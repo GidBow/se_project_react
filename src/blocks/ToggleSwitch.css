@@ -4,10 +4,9 @@
   height: 28px;
   border: 2px solid black;
   border-radius: 20px;
-  cursor: pointer;
   overflow: hidden;
   position: relative;
-  left: 140px;
+  flex-shrink: 0;
 }
 
 .toggle-switch__checkbox {

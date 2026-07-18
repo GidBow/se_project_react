@@ -36,3 +36,11 @@ export const deleteItem = (item_id, token) => {
     method: "DELETE",
   });
 };
+
+export const updateProfile = ({ name, avatar }, token) => {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: getAuthHeaders(token),
+    body: JSON.stringify({ name, avatar }),
+  });
+};

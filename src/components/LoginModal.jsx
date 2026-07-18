@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { useFormWithValidation } from "../hooks/useFormWithValidation";
 import ModalWithForm from "./ModalWithForm";
 
-const LoginModal = ({ isOpen, onClose, onLogin, onSubmit }) => {
+const LoginModal = ({
+  isOpen,
+  onClose,
+  onLogin,
+  onSubmit,
+  onSwitchToRegister,
+}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const defaultValues = {
@@ -84,6 +90,16 @@ const LoginModal = ({ isOpen, onClose, onLogin, onSubmit }) => {
           <span className="modal__error">{errors.password}</span>
         )}
       </label>
+
+      {onSwitchToRegister && (
+        <button
+          type="button"
+          className="modal__link-button"
+          onClick={onSwitchToRegister}
+        >
+          Need an account? Register
+        </button>
+      )}
     </ModalWithForm>
   );
 };

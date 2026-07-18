@@ -2,15 +2,40 @@ import { useEffect, useState } from "react";
 import { useFormWithValidation } from "../hooks/useFormWithValidation";
 import ModalWithForm from "./ModalWithForm";
 
-const RegisterModal = ({ isOpen, onClose, onRegister, onSubmit }) => {
+const RegisterModal = ({
+  isOpen,
+  onClose,
+  onRegister,
+  onSubmit,
+  onSwitchToLogin,
+}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const defaultValues = {
+    name: "",
+    avatar: "",
     email: "",
     password: "",
   };
 
   const validationRules = {
+    name: [
+      (value) => (!value.trim() ? "Name is required" : ""),
+      (value) =>
+        value.trim().length < 2 ? "Name must be at least 2 characters" : "",
+    ],
+    avatar: [
+      (value) => (!value.trim() ? "Avatar URL is required" : ""),
+      (value) => {
+        if (!value.trim()) return "";
+        try {
+          new URL(value);
+          return "";
+        } catch {
+          return "Invalid URL format";
+        }
+      },
+    ],
     email: [
       (value) => (!value.trim() ? "Email is required" : ""),
       (value) => {
@@ -53,6 +78,38 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onSubmit }) => {
       onSubmit={onFormSubmit}
       isOpen={isOpen}
     >
+      <label htmlFor="name" className="modal__label">
+        Name
+        <input
+          type="text"
+          id="name"
+          name="name"
+          className={`modal__input${isSubmitted && errors.name ? " modal__input--invalid" : ""}`}
+          value={values.name || ""}
+          onChange={handleChange}
+          required
+        />
+        {isSubmitted && errors.name && (
+          <span className="modal__error">{errors.name}</span>
+        )}
+      </label>
+
+      <label htmlFor="avatar" className="modal__label">
+        Avatar URL
+        <input
+          type="url"
+          id="avatar"
+          name="avatar"
+          className={`modal__input${isSubmitted && errors.avatar ? " modal__input--invalid" : ""}`}
+          value={values.avatar || ""}
+          onChange={handleChange}
+          required
+        />
+        {isSubmitted && errors.avatar && (
+          <span className="modal__error">{errors.avatar}</span>
+        )}
+      </label>
+
       <label htmlFor="email" className="modal__label">
         Email
         <input
@@ -84,6 +141,16 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onSubmit }) => {
           <span className="modal__error">{errors.password}</span>
         )}
       </label>
+
+      {onSwitchToLogin && (
+        <button
+          type="button"
+          className="modal__link-button"
+          onClick={onSwitchToLogin}
+        >
+          Already have an account? Login
+        </button>
+      )}
     </ModalWithForm>
   );
 };

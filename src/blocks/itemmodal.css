@@ -43,3 +43,7 @@
   bottom: 93px;
   background-color: #fff;
 }
+
+.modal__delete-btn_hidden {
+  display: none;
+}
