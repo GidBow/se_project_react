@@ -56,7 +56,9 @@ function App() {
   };
 
   const onDeleteItemHandler = (item_id) => {
-    deleteItem(item_id)
+    const token = localStorage.getItem("jwt");
+
+    deleteItem(item_id, token)
       .then(() => {
         const filteredArray = clothingItems.filter((item) => {
           return item._id !== item_id;
@@ -68,12 +70,13 @@ function App() {
   };
 
   const onAddItems = (inputValues) => {
+    const token = localStorage.getItem("jwt");
     const newCardData = {
       name: inputValues.name,
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
     };
-    addItems(newCardData)
+    addItems(newCardData, token)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
         closeModal();

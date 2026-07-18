@@ -9,19 +9,30 @@ function request(url, options) {
   return fetch(url, options).then(handleServerResponse);
 }
 
+const getAuthHeaders = (token) => {
+  if (!token) {
+    return headers;
+  }
+
+  return {
+    ...headers,
+    authorization: `Bearer ${token}`,
+  };
+};
+
 export const getItems = () => request(`${baseUrl}/items`, { headers });
 
-export const addItems = ({ name, imageUrl, weather }) => {
+export const addItems = ({ name, imageUrl, weather }, token) => {
   return request(`${baseUrl}/items`, {
     method: "POST",
-    headers,
+    headers: getAuthHeaders(token),
     body: JSON.stringify({ name, imageUrl, weather }),
   });
 };
 
-export const deleteItem = (item_id) => {
+export const deleteItem = (item_id, token) => {
   return request(`${baseUrl}/items/${item_id}`, {
-    headers,
+    headers: getAuthHeaders(token),
     method: "DELETE",
   });
 };
