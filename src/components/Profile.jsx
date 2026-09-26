@@ -5,6 +5,7 @@ import "../blocks/Profile.css";
 
 function Profile({
   onCardClick,
+  onCardLike,
   handleAddClick,
   clothingItems,
   isEditProfileModalOpen,
@@ -21,6 +22,7 @@ function Profile({
       <section className="profile__clothing-items">
         <ClothesSection
           onCardClick={onCardClick}
+          onCardLike={onCardLike}
           handleAddClick={handleAddClick}
           clothingItems={clothingItems}
         />

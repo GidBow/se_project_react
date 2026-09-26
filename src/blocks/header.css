@@ -73,6 +73,28 @@
   border: 1px solid #c7c7c7;
 }
 
+.header__auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header__auth-button {
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  color: #000;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.header__auth-button--primary {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
 .header__profile-link {
   text-decoration: none;
   color: #000;

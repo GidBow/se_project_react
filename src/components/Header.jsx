@@ -7,6 +7,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 function Header({
   handleAddClick,
   handleLoginClick,
+  handleRegisterClick,
   weatherData,
   isUsingFallbackLocation,
 }) {
@@ -58,13 +59,22 @@ function Header({
           )}
         </Link>
       ) : (
-        <button
-          type="button"
-          className="header__profile-link"
-          onClick={handleLoginClick}
-        >
-          <p className="header__user-name">Sign in</p>
-        </button>
+        <div className="header__auth-actions">
+          <button
+            type="button"
+            className="header__auth-button"
+            onClick={handleLoginClick}
+          >
+            Log in
+          </button>
+          <button
+            type="button"
+            className="header__auth-button header__auth-button--primary"
+            onClick={handleRegisterClick}
+          >
+            Sign up
+          </button>
+        </div>
       )}
     </header>
   );

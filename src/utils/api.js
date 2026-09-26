@@ -37,6 +37,18 @@ export const deleteItem = (item_id, token) => {
   });
 };
 
+export const addCardLike = (itemId, token) =>
+  request(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers: getAuthHeaders(token),
+  });
+
+export const removeCardLike = (itemId, token) =>
+  request(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers: getAuthHeaders(token),
+  });
+
 export const updateProfile = ({ name, avatar }, token) => {
   return request(`${baseUrl}/users/me`, {
     method: "PATCH",
