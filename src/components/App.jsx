@@ -167,7 +167,7 @@ function App() {
     deleteItem(item_Id, token)
       .then(() => {
         const filteredArray = clothingItems.filter((item) => {
-          return item._Id !== item_Id;
+          return item._id !== item_Id;
         });
         setClothingItems(filteredArray);
         closeModal();
