@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import hlogo from "../assets/wtwr-header.svg";
+import headerLogo from "../assets/wtwr-header.svg";
 import ToggleSwitch from "./ToggleSwitch";
 import { Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/CurrentUserContext";
@@ -8,6 +8,7 @@ function Header({
   handleAddClick,
   handleLoginClick,
   handleRegisterClick,
+  handleLogout,
   weatherData,
   isUsingFallbackLocation,
 }) {
@@ -25,7 +26,7 @@ function Header({
   return (
     <header className="header">
       <Link to="/">
-        <img src={hlogo} alt="WTWR logo" className="header__logo" />
+        <img src={headerLogo} alt="WTWR logo" className="header__logo" />
       </Link>
       <div className="header__date-location">
         {currentDate}, {weatherData.city}
@@ -44,20 +45,29 @@ function Header({
         </button>
       </div>
       {isLoggedIn && currentUser ? (
-        <Link to="/profile" className="header__profile-link">
-          <p className="header__user-name">{currentUser.name}</p>
-          {currentUser.avatar ? (
-            <img
-              src={currentUser.avatar}
-              alt="User Avatar"
-              className="header__user-avatar"
-            />
-          ) : (
-            <div className="header__user-avatar header__user-avatar--placeholder">
-              {getInitials(currentUser.name)}
-            </div>
-          )}
-        </Link>
+        <div className="header__auth-actions">
+          <Link to="/profile" className="header__profile-link">
+            <p className="header__user-name">{currentUser.name}</p>
+            {currentUser.avatar ? (
+              <img
+                src={currentUser.avatar}
+                alt="User Avatar"
+                className="header__user-avatar"
+              />
+            ) : (
+              <div className="header__user-avatar header__user-avatar--placeholder">
+                {getInitials(currentUser.name)}
+              </div>
+            )}
+          </Link>
+          <button
+            type="button"
+            className="header__auth-button"
+            onClick={handleLogout}
+          >
+            Sign out
+          </button>
+        </div>
       ) : (
         <div className="header__auth-actions">
           <button

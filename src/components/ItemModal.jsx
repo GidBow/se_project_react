@@ -11,12 +11,14 @@ function ItemModal({
   onClose,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
-// Checking if the current user is the owner of the current clothing item
-const isOwn = selectedCard.owner === currentUser._id;
-// Creating a variable which you'll then set in `className` for the delete button
-const itemDeleteButtonClassName = (
-  `modal__delete-button ${isOwn ? '' : 'modal__delete-button_hidden'}`
-);
+  const isOwn = Boolean(currentUser && card?.owner === currentUser._id);
+  const itemDeleteButtonClassName = `modal__delete-btn${
+    isOwn ? "" : " modal__delete-btn_hidden"
+  }`;
+
+  if (!card) {
+    return null;
+  }
 
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>

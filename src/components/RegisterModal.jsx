@@ -78,11 +78,11 @@ const RegisterModal = ({
       onSubmit={onFormSubmit}
       isOpen={isOpen}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="name-register" className="modal__label">
         Name
         <input
           type="text"
-          id="name"
+          id="name-register"
           name="name"
           className={`modal__input${isSubmitted && errors.name ? " modal__input--invalid" : ""}`}
           value={values.name || ""}
@@ -94,11 +94,11 @@ const RegisterModal = ({
         )}
       </label>
 
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="avatar-register" className="modal__label">
         Avatar URL
         <input
           type="url"
-          id="avatar"
+          id="avatar-register"
           name="avatar"
           className={`modal__input${isSubmitted && errors.avatar ? " modal__input--invalid" : ""}`}
           value={values.avatar || ""}
@@ -110,11 +110,11 @@ const RegisterModal = ({
         )}
       </label>
 
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="email-register" className="modal__label">
         Email
         <input
           type="email"
-          id="email"
+          id="email-register"
           name="email"
           className={`modal__input${isSubmitted && errors.email ? " modal__input--invalid" : ""}`}
           value={values.email || ""}
@@ -126,11 +126,11 @@ const RegisterModal = ({
         )}
       </label>
 
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="password-register" className="modal__label">
         Password
         <input
           type="password"
-          id="password"
+          id="password-register"
           name="password"
           className={`modal__input${isSubmitted && errors.password ? " modal__input--invalid" : ""}`}
           value={values.password || ""}

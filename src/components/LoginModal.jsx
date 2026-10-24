@@ -59,11 +59,11 @@ const LoginModal = ({
       onSubmit={onFormSubmit}
       isOpen={isOpen}
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="email-login" className="modal__label">
         Email
         <input
           type="email"
-          id="email"
+          id="email-login"
           name="email"
           className={`modal__input${isSubmitted && errors.email ? " modal__input--invalid" : ""}`}
           value={values.email || ""}
@@ -75,11 +75,11 @@ const LoginModal = ({
         )}
       </label>
 
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="password-login" className="modal__label">
         Password
         <input
           type="password"
-          id="password"
+          id="password-login"
           name="password"
           className={`modal__input${isSubmitted && errors.password ? " modal__input--invalid" : ""}`}
           value={values.password || ""}

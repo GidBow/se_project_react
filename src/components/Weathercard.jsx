@@ -2,7 +2,7 @@ import sunny from "../assets/sunny.svg";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 
-function WeatherCard({ weatherData }) {
+function Weathercard({ weatherData }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   return (
     <section className="weather-card">
@@ -19,4 +19,4 @@ function WeatherCard({ weatherData }) {
   );
 }
 
-export default WeatherCard;
+export default Weathercard;

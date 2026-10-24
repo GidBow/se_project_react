@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = "http://127.0.0.1:3001";
 const headers = { "Content-Type": "application/json" };
 
 export const handleServerResponse = (res) => {
@@ -30,8 +30,8 @@ export const addItems = ({ name, imageUrl, weather }, token) => {
   });
 };
 
-export const deleteItem = (item_id, token) => {
-  return request(`${baseUrl}/items/${item_id}`, {
+export const deleteItem = (itemId, token) => {
+  return request(`${baseUrl}/items/${itemId}`, {
     headers: getAuthHeaders(token),
     method: "DELETE",
   });

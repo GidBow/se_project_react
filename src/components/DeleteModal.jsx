@@ -1,6 +1,6 @@
 export const DeleteModal = ({ isOpen, onDeleteItemHandler, onClose, card }) => {
-  const clickDeleteItem = (item_id) => {
-    onDeleteItemHandler(item_id);
+  const clickDeleteItem = (item_Id) => {
+    onDeleteItemHandler(item_Id);
   };
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>

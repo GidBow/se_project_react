@@ -61,7 +61,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       onSubmit={onFormSubmit}
       isOpen={isOpen}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="name-add" className="modal__label">
         Name{" "}
         <input
           type="text"
@@ -69,7 +69,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           className={`modal__input${
             isSubmitted && errors.name ? " modal__input--invalid" : ""
           }`}
-          id="name"
+          id="name-add"
           placeholder="name"
           value={values.name}
           onChange={handleChange}
@@ -79,7 +79,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           <span className="modal__error">{errors.name}</span>
         )}
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="imageUrl-add" className="modal__label">
         Image{" "}
         <input
           type="url"
@@ -87,7 +87,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           className={`modal__input${
             isSubmitted && errors.imageUrl ? " modal__input--invalid" : ""
           }`}
-          id="imageUrl"
+          id="imageUrl-add"
           placeholder="Image URL"
           value={values.imageUrl}
           onChange={handleChange}

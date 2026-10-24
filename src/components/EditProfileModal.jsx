@@ -60,7 +60,7 @@ function EditProfileModal({ isOpen, onClose, onUpdateProfile, currentUser }) {
       onSubmit={onFormSubmit}
       isOpen={isOpen}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="name-edit" className="modal__label">
         Name
         <input
           type="text"
@@ -68,7 +68,7 @@ function EditProfileModal({ isOpen, onClose, onUpdateProfile, currentUser }) {
           className={`modal__input${
             isSubmitted && errors.name ? " modal__input--invalid" : ""
           }`}
-          id="name"
+          id="name-edit"
           placeholder="Name"
           value={values.name}
           onChange={handleChange}
@@ -79,7 +79,7 @@ function EditProfileModal({ isOpen, onClose, onUpdateProfile, currentUser }) {
         )}
       </label>
 
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="avatar-edit" className="modal__label">
         Avatar URL
         <input
           type="url"
@@ -87,7 +87,7 @@ function EditProfileModal({ isOpen, onClose, onUpdateProfile, currentUser }) {
           className={`modal__input${
             isSubmitted && errors.avatar ? " modal__input--invalid" : ""
           }`}
-          id="avatar"
+          id="avatar-edit"
           placeholder="Avatar URL"
           value={values.avatar}
           onChange={handleChange}

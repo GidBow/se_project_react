@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
 import Main from "./Main";
@@ -25,6 +25,7 @@ import { signIn, signUp, checkToken } from "../utils/auth";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function App() {
+  const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
@@ -40,6 +41,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+
+  const handleRequestError = (message, error) => {
+    console.warn(message, error);
+  };
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -62,7 +67,9 @@ function App() {
           ),
         );
       })
-      .catch(console.error);
+      .catch((error) => {
+        handleRequestError("Unable to update like status.", error);
+      });
   };
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -97,7 +104,9 @@ function App() {
         setCurrentUser(updatedUser);
         handleEditProfileModalClose();
       })
-      .catch(console.error);
+      .catch((error) => {
+        handleRequestError("Unable to update profile.", error);
+      });
   };
 
   const handleLogin = ({ email, password }) => {
@@ -109,12 +118,17 @@ function App() {
             .then((user) => {
               setCurrentUser(user);
               setIsLoggedIn(true);
+              navigate("/");
               closeModal();
             })
-            .catch(console.error);
+            .catch((error) => {
+              handleRequestError("Unable to validate login session.", error);
+            });
         }
       })
-      .catch(console.error);
+      .catch((error) => {
+        handleRequestError("Unable to sign in.", error);
+      });
   };
 
   const handleRegister = ({ name, avatar, email, password }) => {
@@ -126,26 +140,41 @@ function App() {
             .then((user) => {
               setCurrentUser(user);
               setIsLoggedIn(true);
+              navigate("/");
               closeModal();
             })
-            .catch(console.error);
+            .catch((error) => {
+              handleRequestError("Unable to validate registration session.", error);
+            });
         }
       })
-      .catch(console.error);
+      .catch((error) => {
+        handleRequestError("Unable to register account.", error);
+      });
   };
 
-  const onDeleteItemHandler = (item_id) => {
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setCurrentUser(null);
+    setIsLoggedIn(false);
+    closeModal();
+    navigate("/");
+  };
+
+  const onDeleteItemHandler = (item_Id) => {
     const token = localStorage.getItem("jwt");
 
-    deleteItem(item_id, token)
+    deleteItem(item_Id, token)
       .then(() => {
         const filteredArray = clothingItems.filter((item) => {
-          return item._id !== item_id;
+          return item._Id !== item_Id;
         });
         setClothingItems(filteredArray);
         closeModal();
       })
-      .catch(console.error);
+      .catch((error) => {
+        handleRequestError("Unable to delete item.", error);
+      });
   };
 
   const onAddItems = (inputValues) => {
@@ -160,7 +189,9 @@ function App() {
         setClothingItems([data, ...clothingItems]);
         closeModal();
       })
-      .catch(console.error);
+      .catch((error) => {
+        handleRequestError("Unable to add clothing item.", error);
+      });
   };
 
   const closeModal = () => {
@@ -192,7 +223,9 @@ function App() {
           const filteredData = filterWeatherData(data);
           setWeatherData(filteredData);
         })
-        .catch(console.error);
+        .catch((error) => {
+          handleRequestError("Unable to fetch weather data. Using fallback values.", error);
+        });
     };
 
     if (navigator && navigator.geolocation) {
@@ -228,7 +261,10 @@ function App() {
       .then((data) => {
         setClothingItems([...data].reverse());
       })
-      .catch(console.error);
+      .catch((error) => {
+        handleRequestError("Unable to load clothing items.", error);
+        setClothingItems([]);
+      });
 
     const closeByEscape = (e) => {
       if (e.key === "Escape") {
@@ -251,6 +287,7 @@ function App() {
               handleAddClick={handleAddClick}
               handleLoginClick={handleLoginClick}
               handleRegisterClick={handleRegisterClick}
+              handleLogout={handleLogout}
               weatherData={weatherData}
               isUsingFallbackLocation={isUsingFallbackLocation}
             />
