@@ -1,9 +1,7 @@
+import { handleServerResponse } from "./api.js";
+
 const baseUrl = "http://127.0.0.1:3001";
 const headers = { "Content-Type": "application/json" };
-
-const handleServerResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-};
 
 export const signUp = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {

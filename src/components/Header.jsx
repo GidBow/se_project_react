@@ -36,13 +36,15 @@ function Header({
       </div>
       <div className="header__actions">
         <ToggleSwitch />
-        <button
-          type="button"
-          className="header__add-clothes"
-          onClick={handleAddClick}
-        >
-          +Add garment
-        </button>
+        {isLoggedIn && (
+          <button
+            type="button"
+            className="header__add-clothes"
+            onClick={handleAddClick}
+          >
+            +Add garment
+          </button>
+        )}
       </div>
       {isLoggedIn && currentUser ? (
         <div className="header__auth-actions">

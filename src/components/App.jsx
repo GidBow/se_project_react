@@ -316,7 +316,6 @@ function App() {
                       onEditProfileModalOpen={handleEditProfileModalOpen}
                       onEditProfileModalClose={handleEditProfileModalClose}
                       onUpdateProfile={handleUpdateProfile}
-                      currentUser={currentUser}
                     />
                   </ProtectedRoute>
                 }

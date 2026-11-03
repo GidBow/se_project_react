@@ -12,7 +12,6 @@ function Profile({
   onEditProfileModalOpen,
   onEditProfileModalClose,
   onUpdateProfile,
-  currentUser,
 }) {
   return (
     <div className="profile">
@@ -32,7 +31,6 @@ function Profile({
         isOpen={isEditProfileModalOpen}
         onClose={onEditProfileModalClose}
         onUpdateProfile={onUpdateProfile}
-        currentUser={currentUser}
       />
     </div>
   );
