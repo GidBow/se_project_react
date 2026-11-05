@@ -1,15 +1,18 @@
 import ModalWithForm from "./ModalWithForm";
 import { useFormWithValidation } from "../hooks/useFormWithValidation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const defaultValues = {
-    name: "",
-    imageUrl: "",
-    weather: "",
-  };
+  const defaultValues = useMemo(
+    () => ({
+      name: "",
+      imageUrl: "",
+      weather: "",
+    }),
+    [],
+  );
 
   const validationRules = {
     name: [
@@ -32,7 +35,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     weather: [(value) => (!value ? "Weather type is required" : "")],
   };
 
-  const { values, errors, isValid, handleChange, handleReset, handleSubmit } =
+  const { values, errors, handleChange, handleReset, handleSubmit } =
     useFormWithValidation(defaultValues, validationRules);
 
   function onSubmit(formValues) {
@@ -44,7 +47,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       handleReset();
       setIsSubmitted(false);
     }
-  }, [isOpen]);
+  }, [isOpen, handleReset]);
 
   // Custom submit handler to track submission attempt
   const onFormSubmit = (event) => {

@@ -65,11 +65,11 @@ export function useFormWithValidation(defaultValues, validationRules = {}) {
     });
   };
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setValues(defaultValues);
     setErrors({});
     setIsValid(true);
-  };
+  }, [defaultValues]);
 
   const handleSubmit = (callback) => {
     return (event) => {

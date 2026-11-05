@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFormWithValidation } from "../hooks/useFormWithValidation";
 import ModalWithForm from "./ModalWithForm";
 
@@ -11,10 +11,13 @@ const LoginModal = ({
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const defaultValues = {
-    email: "",
-    password: "",
-  };
+  const defaultValues = useMemo(
+    () => ({
+      email: "",
+      password: "",
+    }),
+    [],
+  );
 
   const validationRules = {
     email: [
@@ -35,7 +38,7 @@ const LoginModal = ({
       handleReset();
       setIsSubmitted(false);
     }
-  }, [isOpen]);
+  }, [isOpen, handleReset]);
 
   const handleFormSubmit = (formValues) => {
     if (onLogin) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFormWithValidation } from "../hooks/useFormWithValidation";
 import ModalWithForm from "./ModalWithForm";
 
@@ -11,12 +11,15 @@ const RegisterModal = ({
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const defaultValues = {
-    name: "",
-    avatar: "",
-    email: "",
-    password: "",
-  };
+  const defaultValues = useMemo(
+    () => ({
+      name: "",
+      avatar: "",
+      email: "",
+      password: "",
+    }),
+    [],
+  );
 
   const validationRules = {
     name: [
@@ -54,7 +57,7 @@ const RegisterModal = ({
       handleReset();
       setIsSubmitted(false);
     }
-  }, [isOpen]);
+  }, [isOpen, handleReset]);
 
   const handleFormSubmit = (formValues) => {
     if (onRegister) {
