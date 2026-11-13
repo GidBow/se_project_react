@@ -12,11 +12,15 @@ function Profile({
   onEditProfileModalOpen,
   onEditProfileModalClose,
   onUpdateProfile,
+  onLogout,
 }) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar onEditProfileClick={onEditProfileModalOpen} />
+        <SideBar
+          onEditProfileClick={onEditProfileModalOpen}
+          onLogout={onLogout}
+        />
       </section>
       <section className="profile__clothing-items">
         <ClothesSection

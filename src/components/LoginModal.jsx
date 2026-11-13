@@ -8,6 +8,8 @@ const LoginModal = ({
   onLogin,
   onSubmit,
   onSwitchToRegister,
+  hasLoginError,
+  onClearLoginError,
 }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -30,7 +32,7 @@ const LoginModal = ({
     password: [(value) => (!value.trim() ? "Password is required" : "")],
   };
 
-  const { values, errors, handleChange, handleReset, handleSubmit } =
+  const { values, errors, isValid, handleChange, handleReset, handleSubmit } =
     useFormWithValidation(defaultValues, validationRules);
 
   useEffect(() => {
@@ -41,11 +43,17 @@ const LoginModal = ({
   }, [isOpen, handleReset]);
 
   const handleFormSubmit = (formValues) => {
+    onClearLoginError?.();
     if (onLogin) {
       onLogin(formValues);
     } else if (onSubmit) {
       onSubmit(formValues);
     }
+  };
+
+  const handleInputChange = (event) => {
+    onClearLoginError?.();
+    handleChange(event);
   };
 
   const onFormSubmit = (event) => {
@@ -61,6 +69,10 @@ const LoginModal = ({
       onClose={onClose}
       onSubmit={onFormSubmit}
       isOpen={isOpen}
+      switchButtonText={onSwitchToRegister ? "or Sign Up" : undefined}
+      onSwitchButtonClick={onSwitchToRegister}
+      isSubmitDisabled={!isValid}
+      contentClassName="modal__content--compact"
     >
       <label htmlFor="email-login" className="modal__label">
         Email
@@ -70,7 +82,7 @@ const LoginModal = ({
           name="email"
           className={`modal__input${isSubmitted && errors.email ? " modal__input--invalid" : ""}`}
           value={values.email || ""}
-          onChange={handleChange}
+          onChange={handleInputChange}
           required
         />
         {isSubmitted && errors.email && (
@@ -86,23 +98,19 @@ const LoginModal = ({
           name="password"
           className={`modal__input${isSubmitted && errors.password ? " modal__input--invalid" : ""}`}
           value={values.password || ""}
-          onChange={handleChange}
+          onChange={handleInputChange}
           required
         />
         {isSubmitted && errors.password && (
           <span className="modal__error">{errors.password}</span>
         )}
+        {hasLoginError && (
+          <span className="modal__error" role="alert">
+            Email or password incorrect
+          </span>
+        )}
       </label>
 
-      {onSwitchToRegister && (
-        <button
-          type="button"
-          className="modal__link-button"
-          onClick={onSwitchToRegister}
-        >
-          Need an account? Register
-        </button>
-      )}
     </ModalWithForm>
   );
 };

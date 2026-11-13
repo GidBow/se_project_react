@@ -3,7 +3,6 @@ import { useState, useCallback } from "react";
 export function useFormWithValidation(defaultValues, validationRules = {}) {
   const [values, setValues] = useState(defaultValues);
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(true);
 
   // Validate a single field
   const validateField = useCallback(
@@ -26,6 +25,10 @@ export function useFormWithValidation(defaultValues, validationRules = {}) {
     [validationRules]
   );
 
+  const isValid = Object.keys(validationRules).every(
+    (fieldName) => !validateField(fieldName, values[fieldName]),
+  );
+
   // Validate all fields
   const validateForm = useCallback(
     (formValues) => {
@@ -39,9 +42,7 @@ export function useFormWithValidation(defaultValues, validationRules = {}) {
       });
 
       setErrors(newErrors);
-      const isFormValid = Object.keys(newErrors).length === 0;
-      setIsValid(isFormValid);
-      return isFormValid;
+      return Object.keys(newErrors).length === 0;
     },
     [validationRules, validateField]
   );
@@ -60,7 +61,6 @@ export function useFormWithValidation(defaultValues, validationRules = {}) {
       } else {
         delete updatedErrors[name];
       }
-      setIsValid(Object.keys(updatedErrors).length === 0);
       return updatedErrors;
     });
   };
@@ -68,7 +68,6 @@ export function useFormWithValidation(defaultValues, validationRules = {}) {
   const handleReset = useCallback(() => {
     setValues(defaultValues);
     setErrors({});
-    setIsValid(true);
   }, [defaultValues]);
 
   const handleSubmit = (callback) => {

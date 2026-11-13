@@ -49,7 +49,7 @@ const RegisterModal = ({
     password: [(value) => (!value.trim() ? "Password is required" : "")],
   };
 
-  const { values, errors, handleChange, handleReset, handleSubmit } =
+  const { values, errors, isValid, handleChange, handleReset, handleSubmit } =
     useFormWithValidation(defaultValues, validationRules);
 
   useEffect(() => {
@@ -80,6 +80,9 @@ const RegisterModal = ({
       onClose={onClose}
       onSubmit={onFormSubmit}
       isOpen={isOpen}
+      switchButtonText={onSwitchToLogin ? "or Log In" : undefined}
+      onSwitchButtonClick={onSwitchToLogin}
+      isSubmitDisabled={!isValid}
     >
       <label htmlFor="name-register" className="modal__label">
         Name
@@ -145,15 +148,6 @@ const RegisterModal = ({
         )}
       </label>
 
-      {onSwitchToLogin && (
-        <button
-          type="button"
-          className="modal__link-button"
-          onClick={onSwitchToLogin}
-        >
-          Already have an account? Login
-        </button>
-      )}
     </ModalWithForm>
   );
 };

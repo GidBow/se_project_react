@@ -41,6 +41,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+  const [hasLoginError, setHasLoginError] = useState(false);
 
   const handleRequestError = (message, error) => {
     console.warn(message, error);
@@ -81,11 +82,8 @@ function App() {
   };
 
   const handleLoginClick = () => {
+    setHasLoginError(false);
     setActiveModal("login");
-  };
-
-  const handleRegisterClick = () => {
-    setActiveModal("register");
   };
 
   const handleEditProfileModalOpen = () => {
@@ -113,6 +111,7 @@ function App() {
     signIn({ email, password })
       .then((res) => {
         if (res.token) {
+          setHasLoginError(false);
           localStorage.setItem("jwt", res.token);
           checkToken(res.token)
             .then((user) => {
@@ -127,6 +126,7 @@ function App() {
         }
       })
       .catch((error) => {
+        setHasLoginError(error === "Error: 401");
         handleRequestError("Unable to sign in.", error);
       });
   };
@@ -196,6 +196,7 @@ function App() {
 
   const closeModal = () => {
     setActiveModal("");
+    setHasLoginError(false);
   };
 
   useEffect(() => {
@@ -286,8 +287,6 @@ function App() {
             <Header
               handleAddClick={handleAddClick}
               handleLoginClick={handleLoginClick}
-              handleRegisterClick={handleRegisterClick}
-              handleLogout={handleLogout}
               weatherData={weatherData}
               isUsingFallbackLocation={isUsingFallbackLocation}
             />
@@ -316,6 +315,7 @@ function App() {
                       onEditProfileModalOpen={handleEditProfileModalOpen}
                       onEditProfileModalClose={handleEditProfileModalClose}
                       onUpdateProfile={handleUpdateProfile}
+                      onLogout={handleLogout}
                     />
                   </ProtectedRoute>
                 }
@@ -334,13 +334,18 @@ function App() {
             isOpen={activeModal === "login"}
             onClose={closeModal}
             onLogin={handleLogin}
-            onSwitchToRegister={() => setActiveModal("register")}
+            hasLoginError={hasLoginError}
+            onClearLoginError={() => setHasLoginError(false)}
+            onSwitchToRegister={() => {
+              setHasLoginError(false);
+              setActiveModal("register");
+            }}
           />
           <RegisterModal
             isOpen={activeModal === "register"}
             onClose={closeModal}
             onRegister={handleRegister}
-            onSwitchToLogin={() => setActiveModal("login")}
+            onSwitchToLogin={handleLoginClick}
           />
           <ItemModal
             isOpen={activeModal === "preview"}

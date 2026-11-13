@@ -7,8 +7,6 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 function Header({
   handleAddClick,
   handleLoginClick,
-  handleRegisterClick,
-  handleLogout,
   weatherData,
   isUsingFallbackLocation,
 }) {
@@ -17,11 +15,7 @@ function Header({
     month: "long",
     day: "numeric",
   });
-
-  const getInitials = (name) => {
-    if (!name) return "U";
-    return name.charAt(0).toUpperCase();
-  };
+  const getInitials = (name) => name?.charAt(0).toUpperCase() || "U";
 
   return (
     <header className="header">
@@ -47,29 +41,20 @@ function Header({
         )}
       </div>
       {isLoggedIn && currentUser ? (
-        <div className="header__auth-actions">
-          <Link to="/profile" className="header__profile-link">
-            <p className="header__user-name">{currentUser.name}</p>
-            {currentUser.avatar ? (
-              <img
-                src={currentUser.avatar}
-                alt="User Avatar"
-                className="header__user-avatar"
-              />
-            ) : (
-              <div className="header__user-avatar header__user-avatar--placeholder">
-                {getInitials(currentUser.name)}
-              </div>
-            )}
-          </Link>
-          <button
-            type="button"
-            className="header__auth-button"
-            onClick={handleLogout}
-          >
-            Sign out
-          </button>
-        </div>
+        <Link to="/profile" className="header__profile-link">
+          <p className="header__user-name">{currentUser.name}</p>
+          {currentUser.avatar ? (
+            <img
+              src={currentUser.avatar}
+              alt={`${currentUser.name}'s avatar`}
+              className="header__user-avatar"
+            />
+          ) : (
+            <div className="header__user-avatar header__user-avatar--placeholder">
+              {getInitials(currentUser.name)}
+            </div>
+          )}
+        </Link>
       ) : (
         <div className="header__auth-actions">
           <button
@@ -78,13 +63,6 @@ function Header({
             onClick={handleLoginClick}
           >
             Log in
-          </button>
-          <button
-            type="button"
-            className="header__auth-button header__auth-button--primary"
-            onClick={handleRegisterClick}
-          >
-            Sign up
           </button>
         </div>
       )}

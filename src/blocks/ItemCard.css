@@ -3,12 +3,10 @@
 }
 
 .cards__list {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
   border-radius: 5px;
-  border: 1px;
-  align-items: space-between;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -16,36 +14,67 @@
 
 .cards__id {
   position: relative;
+  display: flex;
   justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.cards__image-overlay {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  right: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  line-height: normal;
 }
 
 .cards__name {
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  text-align: center;
-  transform: translate(-50%, -50%);
+  min-width: 0;
+  max-width: calc(100% - 44px);
+  margin: 0;
+  text-align: left;
   max-height: 24px;
-  max-width: 100px;
-  background-color: rgba(255, 255, 255, 1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.9);
   font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
   font-size: 16px;
   line-height: 20px;
   padding: 2px 12px;
 }
 
+.cards__image-container {
+  position: relative;
+  display: inline-block;
+  max-width: min(328px, 100%);
+  line-height: 0;
+}
+
 .cards__like {
-  position: absolute;
-  z-index: 1;
-  top: 12px;
-  right: 12px;
+  display: flex;
+  flex: 0 0 32px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
   border: 0;
-  border-radius: 4px;
-  padding: 5px 8px;
-  background-color: #fff;
+  padding: 0;
+  background: transparent;
   color: #333;
   cursor: pointer;
   font: inherit;
+}
+
+.cards__like-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .cards__like:disabled {
@@ -54,18 +83,33 @@
 }
 
 .cards__like_active {
-  background-color: #333;
-  color: #fff;
+  color: #000;
 }
 
 .cards__img {
+  display: block;
+  box-sizing: border-box;
   border-radius: 28px;
   border: solid 1px rgba(0, 0, 0, 0.3);
+  width: auto;
+  height: auto;
+  max-width: min(328px, 100%);
   max-height: 328px;
-  max-width: 328px;
 }
 
 .cards__text {
   font-family: "CabinetGrotesk-Bold", Helvetica, sans-serif;
   font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .cards__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .cards__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
